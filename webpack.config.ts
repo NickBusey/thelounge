@@ -162,6 +162,12 @@ const config: webpack.Configuration = {
 					to: "img/[name][ext]",
 				},
 				{
+					from: path
+						.resolve(__dirname, "./client/img/pidgin_nosmile/*")
+						.replace(/\\/g, "/"),
+					to: "img/pidgin_nosmile/[name][ext]",
+				},
+				{
 					from: path.resolve(__dirname, "./client/themes/*").replace(/\\/g, "/"),
 					to: "themes/[name][ext]",
 				},

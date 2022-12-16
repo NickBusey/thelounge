@@ -6,6 +6,8 @@ import parseStyle from "./ircmessageparser/parseStyle";
 import findChannels, {ChannelPart} from "./ircmessageparser/findChannels";
 import {findLinks, LinkPart} from "./ircmessageparser/findLinks";
 import findEmoji, {EmojiPart} from "./ircmessageparser/findEmoji";
+import findEmote, {EmotePart} from "./ircmessageparser/findEmote";
+import emotes from "./emotes.json";
 import findNames, {NamePart} from "./ircmessageparser/findNames";
 import merge, {MergedParts, Part} from "./ircmessageparser/merge";
 import emojiMap from "./fullnamemap.json";
@@ -113,11 +115,13 @@ function parse(text: string, message?: ClientMessage, network?: ClientNetwork) {
 	const channelParts = findChannels(cleanText, channelPrefixes, userModes);
 	const linkParts = findLinks(cleanText);
 	const emojiParts = findEmoji(cleanText);
+	const emoteParts = findEmote(cleanText);
 	const nameParts = findNames(cleanText, message ? message.users || [] : []);
 
 	const parts = (channelParts as MergedParts)
 		.concat(linkParts)
 		.concat(emojiParts)
+		.concat(emoteParts)
 		.concat(nameParts);
 
 	// Merge the styling information with the channels / URLs / nicks / text objects and
@@ -212,6 +216,11 @@ function parse(text: string, message?: ClientMessage, network?: ClientNetwork) {
 					default: () => fragments,
 				}
 			);
+		} else if (textPart.emote) {
+			const filename = emotes[textPart.emote] as string;
+			return createElement("img", {
+				src: `img/pidgin_nosmile/${filename}`,
+			});
 		}
 
 		return fragments;

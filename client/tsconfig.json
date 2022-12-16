@@ -35,6 +35,7 @@
     "../server/models/msg.ts",
     "../server/models/prefix.ts",
     "./js/helpers/fullnamemap.json",
+    "./js/helpers/emotes.json",
     "./js/helpers/simplemap.json",
     "../webpack.config.ts",
     "../babel.config.cjs"
@@ -44,13 +45,11 @@
     "sourceMap": false /*Create source map files for emitted JavaScript files. See more: https://www.typescriptlang.org/tsconfig#sourceMap */,
     "jsx": "preserve" /* Specify what JSX code is generated. */,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-
     // this enables stricter inference for data properties on `this`
     "strict": true,
     // if using webpack 2+ or rollup, to leverage tree shaking:
     "module": "es2020",
     "moduleResolution": "node",
-
     // TODO: Remove eventually
     "noImplicitAny": false /*Enable error reporting for expressions and declarations with an implied any type. See more: https://www.typescriptlang.org/tsconfig#noImplicitAny */
   } /* Instructs the TypeScript compiler how to compile .ts files. */
