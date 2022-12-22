@@ -208,6 +208,7 @@ function parse(text: string, message?: ClientMessage, network?: ClientNetwork) {
 				Username,
 				{
 					user: {
+						alt: textPart.emote,
 						nick: textPart.nick,
 					},
 					dir: "auto",
